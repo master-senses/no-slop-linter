@@ -1,0 +1,28 @@
+{
+  "name": "no-slop-linter",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Oxlint workspace that runs @shadcn/lint and Dillon Mulroy's anti-slop rules.",
+  "scripts": {
+    "lint": "node scripts/oxlint.mjs src examples/pass",
+    "lint:fail": "node scripts/oxlint.mjs examples/fail",
+    "check:examples": "node scripts/check-examples.mjs",
+    "check": "npm run lint && npm run check:examples"
+  },
+  "engines": {
+    "node": ">=20.19"
+  },
+  "devDependencies": {
+    "@oxlint/plugins": "1.85.0",
+    "@shadcn/lint": "0.2.0",
+    "@types/react": "^19.1.13",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "oxlint": "1.85.0",
+    "react": "^19.1.1",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^4.1.13",
+    "typescript": "^5.9.2"
+  }
+}

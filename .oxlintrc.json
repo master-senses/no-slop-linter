@@ -1,0 +1,84 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "ignorePatterns": [
+    "node_modules/**",
+    "tools/oxlint/anti-slop/**"
+  ],
+  "jsPlugins": [
+    "@shadcn/lint",
+    {
+      "name": "anti-slop",
+      "specifier": "./tools/oxlint/anti-slop/index.ts"
+    }
+  ],
+  "settings": {
+    "shadcn": {
+      "note": "Use a Button/Card variant or a theme token from src/styles/theme.css. See README.md."
+    }
+  },
+  "plugins": ["oxc"],
+  "rules": {
+    "oxc/no-accumulating-spread": "error",
+    "shadcn/no-restyle": [
+      "error",
+      {
+        "allow": ["layout"],
+        "contracts": [
+          {
+            "pattern": "^Button$",
+            "allow": ["layout", "w-full", "mt-*", "mb-*"]
+          },
+          {
+            "pattern": "^CardTitle$",
+            "allow": ["layout", "typography"],
+            "deny": ["font-*"]
+          },
+          {
+            "pattern": "^CardContent$",
+            "allow": ["layout", "spacing"]
+          }
+        ],
+        "message": {
+          "spacing": "Use a {{component}} size: {{sizes|none defined}} instead of padding or height overrides.",
+          "default": "Use a {{component}} variant: {{variants|none defined}}. Do not restyle the component at the call site."
+        }
+      }
+    ],
+    "shadcn/no-raw-colors": [
+      "error",
+      {
+        "message": "Use a theme color from {{file}} instead of a raw palette class."
+      }
+    ],
+    "shadcn/no-arbitrary-values": "error",
+    "shadcn/no-inline-styles": "error",
+    "shadcn/no-unknown-classes": "error",
+    "shadcn/require-static-classes": "error",
+    "anti-slop/no-array-filter-map": "error",
+    "anti-slop/no-reduce-accumulator-copy": "error",
+    "anti-slop/no-chained-type-assertions": "error",
+    "anti-slop/no-conditional-empty-object-spread": "error",
+    "anti-slop/no-known-value-widening": "error",
+    "anti-slop/no-module-mocking": "error",
+    "anti-slop/no-object-parameters": "error",
+    "anti-slop/no-reflect-apply": "error",
+    "anti-slop/no-reflect-get": "error",
+    "anti-slop/no-runtime-typeof": "error",
+    "anti-slop/no-shape-in-symbol-names": "error",
+    "anti-slop/no-unknown-parameters": "error",
+    "anti-slop/no-unknown-returns": "error",
+    "anti-slop/no-unknown-type-aliases": "error",
+    "anti-slop/no-unsafe-dictionary-type": "error",
+    "anti-slop/no-widen-then-assert": "error",
+    "anti-slop/require-readable-spacing": "error",
+    "anti-slop/require-safety-comment-for-type-assertion": "error"
+  },
+  "overrides": [
+    {
+      "files": ["src/components/ui/**"],
+      "rules": {
+        "shadcn/no-restyle": "off"
+      }
+    }
+  ]
+}
